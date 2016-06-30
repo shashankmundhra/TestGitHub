@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="stylesheet" href="calcstyle.css">
+	<meta charset="utf-8">
+	<title>Calculator</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+	$("document").ready(function () {
+    var key = null;
+    $(".Show").click(function () {
+        var EText = $('#Result').val();
+        if (EText != "0") {
+            var val1 = EText;
+            var ButtonVal = $(this);
+            var val2 = ButtonVal.text();
+            var Res = val1 + val2;
+            $('#Result').val(Res);
+        } else {
+            $('#Result').val()
+        }
+    });
+    $(function () {
+        var interRes = null;
+        var operator;
+        $('.operators').click(function () {
+            var value1 = $('#Result').val();
+            if (interRes != null) {
+                var result = ApplyOperation(interRes, value1, operator);
+                interRes = result;
+            } else {
+                interRes = value1;
+            }
+            operator = $(this).text();
+            $('input').val("");
+        });
+        $('#Calculate').click(function () {
+            var op = operator;
+            var res;
+            var value2 = $('#Result').val();
+            if (value2 != "") {
+                res = ApplyOperation(interRes, value2, op);
+            } else {
+                res = interRes;
+            }
+            $('#Result').val(res);
+            interRes = null;
+        });
+    });
+    function ApplyOperation(value1, value2, operator) {
+        var res;
+        switch (operator) {
+            case "+":
+                res = addi(value1, value2);
+                break;
+            case "-":
+                res = subt(value1, value2);
+                break;
+            case "*":
+                res = mult(value1, value2);
+                break;
+            case "/":
+                res = dive(value1, value2);
+                break;
+        }
+        return res;
+    }
+    function addi(first, second) {
+        var a = parseFloat(first);
+        var b = parseFloat(second);
+        var total = a + b;
+        return total;
+    }
+    function subt(first, second) {
+        var a = parseFloat(first);
+        var b = parseFloat(second);
+        var sub = a - b;
+        return sub;
+    }
+    function mult(first, second) {
+        var a = parseFloat(first);
+        var b = parseFloat(second);
+        var product = a * b;
+        return product;
+    }
+    function dive(first, second) {
+        var a = parseFloat(first);
+        var b = parseFloat(second);
+        var divi = a / b;
+        return divi;
+    }
+});
+</script>
+</head>
+<body>
+	<div id="main">
+     <h2>Simple Calculator</h2>
+    <input id="Result" type="number" />
+    <div id="keys">
+        <div id="FirstRow">
+            <button id="Add" type="button" value="+" class="operators operand">+</button>
+            <button id="Zero" type="button" value="0" class="Show">0</button>
+            <button id="Calculate" type="button" value="=" class="operand">=</button>
+        </div>
+        <div id="SecondRow">
+            <button id="One" type="button" value="1" class="Show">1</button>
+            <button id="Two" type="button" value="2" class="Show">2</button>
+            <button id="Three" type="button" value="3" class="Show">3</button>
+            <button id="Sub" type="button" value="-" class="operators operand">-</button>
+        </div>
+        <div id="ThirdRow">
+            <button id="Four" type="button" value="4" class="Show">4</button>
+            <button id="Five" type="button" value="5" class="Show">5</button>
+            <button id="six" type="button" value="6" class="Show">6</button>
+            <button id="Mul" type="button" value="*" class="operators operand">*</button>
+        </div>
+        <div id="FourthRow">
+            <button id="Seven" type="button" value="7" class="Show">7</button>
+            <button id="Eight" type="button" value="8" class="Show">8</button>
+            <button id="Nine" type="button" value="9" class="Show">9</button>
+            <button id="Divide" type="button" value="/" class="operators operand">/</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
