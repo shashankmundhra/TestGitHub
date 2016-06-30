@@ -1,2 +1,2 @@
 # TestGitHub
-Github Sample
+Repo for learning gitHub and its working etc.
